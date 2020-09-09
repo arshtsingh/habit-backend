@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser"
 import mongoose from 'mongoose'
 import userRoutes from "./routes/user.route";
 // import {taskRoutes} from "./routes/task.route";
-// import {checkAuth} from "./middleware/checkAuth";
+import {checkAuth} from "./middleware/checkAuth";
 import {habitRoutes} from './routes/habit.route'
 
 const mongoDB = process.env.MONGODB_URI
@@ -28,8 +28,7 @@ app.use(cookieParser())
 
 // app.use('/testAPI', testAPIRouter)
 app.use('/user', userRoutes)
-// app.use('/task', checkAuth, taskRoutes)
-app.use('/habit', habitRoutes)
+app.use('/habit', checkAuth, habitRoutes)
 
 // error handler
 app.use(function (err: any, req: Request<null>, res: Response, next: any) {
